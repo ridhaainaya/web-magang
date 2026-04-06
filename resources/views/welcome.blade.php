@@ -3,52 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Si APPEM - Sistem Pendaftaran Magang</title>
+    <title>Si TAMA - Sistem Pendaftaran Magang</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-slate-50 min-h-screen flex flex-col">
 
-    <div class="flex justify-end space-x-4 px-10 py-2 text-gray-400 text-sm">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-    </div>
+    <nav x-data="{ open: false }" class="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="{{ asset('images/logo-karanganyar.png') }}" alt="Logo" class="h-12 w-auto">
+                    <div class="flex flex-col justify-center leading-tight">
+                        <span class="text-slate-800 font-bold text-lg tracking-tight">BAPPERIDA</span>
+                        <span class="text-slate-500 text-[10px] font-medium uppercase tracking-widest">Kabupaten Karanganyar</span>
+                    </div>
+                </div>
 
-    <nav class="flex justify-between items-center px-10 py-4 border-b border-gray-100">
-        <div class="flex items-center space-x-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Logo_Kabupaten_Bekasi.png" alt="Logo" class="h-12">
-        </div>
-        <div class="hidden md:flex space-x-8 items-center text-sm font-semibold tracking-wide uppercase">
-            <a href="#" class="text-cyan-500">Home</a>
-            <a href="#" class="text-gray-600 hover:text-cyan-500">Formasi Tersedia</a>
-            <a href="{{ route('login') }}" class="text-gray-600 hover:text-cyan-500">Login</a>
-            <a href="#" class="text-gray-600 hover:text-cyan-500">User Manual</a>
-            <button class="text-cyan-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></button>
-        </div>
-    </nav>
+                <div class="hidden md:flex space-x-10 items-center text-xs font-bold tracking-widest uppercase">
+                    <a href="#" class="text-blue-600 border-b-2 border-blue-600 pb-1">Home</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition">User Manual</a>
+                    <a href="{{ route('login') }}" class="text-gray-500 hover:text-blue-600 transition">Login</a>
+                    <button class="text-gray-400 hover:text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
 
-    <main class="max-w-7xl mx-auto px-10 py-16 flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 space-y-6">
-            <h1 class="text-6xl font-bold text-gray-700">Si APPEM</h1>
-            <p class="text-2xl text-gray-500 font-light tracking-wide">
-                Sistem Aplikasi Pendaftaran & <br> Perijinan Magang
-            </p>
-            <div class="pt-6">
-                <a href="{{ route('register') }}" class="inline-block border-2 border-cyan-400 text-cyan-500 px-10 py-3 rounded-md font-semibold tracking-widest hover:bg-cyan-400 hover:text-white transition uppercase text-sm">
-                    Registrasi Akun
-                </a>
+                <div class="md:hidden flex items-center">
+                    <button @click="open = ! open" class="text-gray-500 hover:text-blue-600 focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="md:w-1/2 mt-12 md:mt-0">
-            <img src="https://ouch-cdn2.icons8.com/V9X9eS6hK07PjP95KAn21yI-G7E6m3M2h6m6q0p9S6Y/rs:fit:450:450/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzQ0/L2Q5Njc3Yjg3LTlk/MzgtNDVkOS05ZjEw/LTI4YjQ5MmZkZjY5/NC5zdmc.png" alt="Illustration" class="w-full h-auto">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-white border-t border-gray-50 px-8 py-4 space-y-4 shadow-inner">
+            <a href="#" class="block text-sm font-bold text-blue-600 uppercase">Home</a>
+            <a href="#" class="block text-sm font-bold text-gray-500 uppercase">User Manual</a>
+            <a href="{{ route('login') }}" class="block text-sm font-bold text-gray-500 uppercase">Login</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-12 md:py-24 flex flex-col md:flex-row items-center justify-between w-full">
+        
+        <div class="w-full md:w-[60%] flex justify-center md:justify-start mb-12 md:mb-0 md:pr-10">
+            <img src="{{ asset('images/ilustrasi-welcome.png') }}" 
+                 alt="Illustration" 
+                 class="w-full h-auto drop-shadow-2xl">
+        </div>
+
+        <div class="w-full md:w-[40%] space-y-8 text-center md:text-right">
+            <div>
+                <h1 class="text-6xl md:text-8xl font-extrabold text-slate-800 tracking-tighter">
+                    Si <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">TAMA</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-500 font-light mt-4 leading-relaxed">
+                    Sistem Pendaftaran Magang
+                </p>
+            </div>
+            
+            <div class="pt-4">
+                <a href="{{ route('register') }}" 
+                   class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-lg font-bold tracking-widest hover:shadow-xl hover:-translate-y-1 transition-all duration-300 uppercase text-sm">
+                    Registrasi Akun Sekarang
+                </a>
+            </div>
+
+            <div class="flex items-center justify-center md:justify-end space-x-6 text-gray-400 text-xs">
+                <span class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Mudah</span>
+                <span class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Cepat</span>
+                <span class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Transparan</span>
+            </div>
         </div>
     </main>
+
+    <footer class="bg-white border-t border-gray-100 py-10">
+        <div class="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                
+                <div class="text-gray-500 text-sm font-medium">
+                    &copy; 2026 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 font-bold">BAPPERIDA</span> Kabupaten Karanganyar.
+                </div>
+
+                <div class="flex items-center space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="hover:text-pink-600 transition text-lg"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-red-600 transition text-lg"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
