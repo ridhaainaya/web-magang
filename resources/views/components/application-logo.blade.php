@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo-karanganyar.png') }}" {{ $attributes->merge(['class' => 'h-20 w-auto']) }} alt="Logo Yayasan">
