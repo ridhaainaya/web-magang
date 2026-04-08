@@ -26,15 +26,21 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+    // Update data di tabel users (email)
+    $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    if ($request->user()->isDirty('email')) {
+        $request->user()->email_verified_at = null;
+    }
+    $request->user()->save();
 
-        $request->user()->save();
+    // Update atau Buat data di tabel profiles
+    $request->user()->profile()->updateOrCreate(
+        ['user_id' => $request->user()->id],
+        $request->only(['nama_lengkap', 'nim_nisn', 'no_hp', 'jenjang_pendidikan', 'sekolah_univ', 'kota_asal', 'jurusan'])
+    );
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**
