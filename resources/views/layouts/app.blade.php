@@ -34,7 +34,7 @@
                     <span x-show="open" class="ms-3 font-semibold text-sm">Dashboard</span>
                 </a>
 
-                <a href="#" class="flex items-center p-3 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-blue-600 transition-all duration-200">
+                <a href="{{ route('permohonan.create') }}" class="flex items-center p-3 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-blue-600 transition-all duration-200">
                     <i class="fas fa-list-ul w-6 text-center"></i>
                     <span x-show="open" class="ms-3 font-semibold text-sm text-nowrap">Permohonan Magang</span>
                 </a>
