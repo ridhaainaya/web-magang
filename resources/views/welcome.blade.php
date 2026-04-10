@@ -38,12 +38,38 @@
                 </div>
 
                 <div class="md:hidden flex items-center">
-                    <button @click="open = ! open" class="text-gray-500 hover:text-blue-600 focus:outline-none">
+                    <button @click="open = ! open" class="text-gray-500 hover:text-blue-600 focus:outline-none transition-colors">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="open" 
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-4"
+            class="md:hidden bg-white border-t border-gray-50 shadow-inner">
+            <div class="px-8 pt-4 pb-6 space-y-2">
+                <a href="#" class="block px-4 py-3 text-sm font-bold text-blue-600 bg-blue-50 rounded-xl tracking-widest uppercase">Home</a>
+                <a href="#" class="block px-4 py-3 text-sm font-bold text-gray-500 hover:text-blue-600 hover:bg-slate-50 rounded-xl tracking-widest uppercase transition">User Manual</a>
+                <a href="{{ route('login') }}" class="block px-4 py-3 text-sm font-bold text-gray-500 hover:text-blue-600 hover:bg-slate-50 rounded-xl tracking-widest uppercase transition">Login</a>
+                
+                <div class="pt-4 border-t border-gray-100">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-100">
+                        <button class="absolute right-4 top-3.5 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -209,17 +235,86 @@
         </section>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-10">
+    <footer class="relative bg-slate-50 border-t border-slate-200/60 pt-16 pb-8 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
+
         <div class="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="text-gray-500 text-sm font-medium">
-                    &copy; 2026 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 font-bold">BAPPERIDA</span> Kabupaten Karanganyar.
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <img src="{{ asset('images/logo-karanganyar.png') }}" alt="Logo" class="h-10 w-auto">
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-slate-800 font-bold text-lg tracking-tight">BAPPERIDA</span>
+                            <span class="text-slate-500 text-[10px] font-medium uppercase tracking-widest">Kabupaten Karanganyar</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Portal resmi pendaftaran magang untuk mahasiswa dan siswa di lingkungan Badan Perencanaan, Riset, dan Inovasi Daerah Kabupaten Karanganyar.
+                    </p>
+                    <div class="flex items-center space-x-4 text-slate-400">
+                        <a href="https://www.instagram.com/bapperida_karanganyar/" class="hover:text-pink-600 transition-colors text-lg"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@bapperida.karanganyar" class="hover:text-red-600 transition-colors text-lg"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-6 text-gray-400">
-                    <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-pink-600 transition text-lg"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-red-600 transition text-lg"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
+
+                <div class="space-y-6">
+                    <h4 class="text-slate-800 font-bold text-sm uppercase tracking-[0.2em] flex items-center">
+                        <span class="w-8 h-[2px] bg-blue-600 mr-3"></span>Hubungi Kami
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3 group">
+                            <div class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                <i class="fas fa-map-marker-alt text-xs"></i>
+                            </div>
+                            <span class="text-slate-500 text-sm leading-snug">
+                                Kompleks Perkantoran, Badran Asri, Cangakan, Kec. Karanganyar, Kabupaten Karanganyar, Jawa Tengah 57713
+                            </span>
+                        </li>
+                                                <li class="flex items-center group">
+                            <a href="tel:0271495179" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                                <div class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-emerald-600 shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                                    <i class="fas fa-phone-alt text-xs"></i>
+                                </div>
+                                <span class="text-slate-500 text-sm font-medium">(0271) 495179</span>
+                            </a>
+                        </li>
+
+                        <li class="flex items-center group">
+                            <a href="mailto:bapperida@karanganyarkab.go.id" class="flex items-center space-x-3 hover:opacity-80 transition-opacity w-full">
+                                <div class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-purple-600 shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+                                    <i class="fas fa-envelope text-xs"></i>
+                                </div>
+                                <span class="text-slate-500 text-[13px] md:text-sm break-all leading-tight font-medium">
+                                    bapperida@karanganyarkab.go.id
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-slate-800 font-bold text-sm uppercase tracking-[0.2em] flex items-center">
+                        <span class="w-8 h-[2px] bg-purple-600 mr-3"></span>Lokasi Kantor
+                    </h4>
+                    <div class="w-full h-56 rounded-2xl overflow-hidden border-4 border-white shadow-md group relative">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.8160043023818!2d110.940682!3d-7.594994700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a187c2f9445af%3A0xb4b189b021ec632e!2sBAPPERIDA%20Kabupaten%20Karanganyar!5e0!3m2!1sid!2sid!4v1775785860713!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        
+                        <a href="https://www.google.com/maps/dir//BAPPERIDA+Kabupaten+Karanganyar/@-7.5954737,110.916894,13z" target="_blank" 
+                        class="absolute top-3 right-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+                            <i class="fas fa-external-link-alt text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-slate-400 text-xs font-medium">
+                    © 2026 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 font-bold">Si TAMA</span> Karanganyar.
+                </p>
+                <div class="flex space-x-8">
+                    <a href="#" class="text-slate-400 hover:text-slate-800 text-xs font-semibold transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="text-slate-400 hover:text-slate-800 text-xs font-semibold transition-colors">Syarat & Ketentuan</a>
                 </div>
             </div>
         </div>
