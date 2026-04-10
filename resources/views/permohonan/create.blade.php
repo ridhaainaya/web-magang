@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-gray-800">Formulir Permohonan Magang</h2>
             <p class="text-gray-500">Silakan lengkapi detail surat dan unggah berkas pengantar dari instansi Anda.</p>

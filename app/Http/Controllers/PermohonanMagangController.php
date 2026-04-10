@@ -53,4 +53,14 @@ class PermohonanMagangController extends Controller
 
         return redirect()->route('dashboard')->with('status', 'Permohonan magang berhasil dikirim!');
     }
+
+    public function showDownload()
+    {
+        $user = Auth::user();
+        // Mengambil permohonan terakhir milik user
+        $application = Application::where('user_id', $user->id)->latest()->first();
+        $profile = $user->profile;
+
+        return view('permohonan.download', compact('user', 'application', 'profile'));
+    }
 }
