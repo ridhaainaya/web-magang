@@ -12,6 +12,9 @@
         @csrf
         @method('patch')
 
+        <input type="hidden" name="name" value="{{ $user->name }}">
+        <input type="hidden" name="email" value="{{ $user->email }}">
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="col-span-2">
                 <x-input-label for="nama_lengkap" :value="__('Nama Lengkap (Sesuai Ijazah)')" />
@@ -34,8 +37,8 @@
                 <select id="jenjang_pendidikan" name="jenjang_pendidikan" class="mt-1 block w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm">
                     <option value="">-- Pilih Jenjang --</option>
                     <option value="SMA/SMK" {{ (old('jenjang_pendidikan', $user->profile->jenjang_pendidikan ?? '') == 'SMA/SMK') ? 'selected' : '' }}>SMA/SMK</option>
-                    <option value="DI-DIII" {{ (old('jenjang_pendidikan', $user->profile->jenjang_pendidikan ?? '') == 'D3') ? 'selected' : '' }}>D3</option>
-                    <option value="DIV-S1" {{ (old('jenjang_pendidikan', $user->profile->jenjang_pendidikan ?? '') == 'S1') ? 'selected' : '' }}>S1</option>
+                    <option value="DI-DIII" {{ (old('jenjang_pendidikan', $user->profile->jenjang_pendidikan ?? '') == 'DI-DIII') ? 'selected' : '' }}>DI-DIII</option>
+                    <option value="DIV-S1" {{ (old('jenjang_pendidikan', $user->profile->jenjang_pendidikan ?? '') == 'DIV-S1') ? 'selected' : '' }}>DIV-S1</option>
                 </select>
             </div>
 
@@ -67,4 +70,15 @@
             @endif
         </div>
     </form>
+
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            <strong>Waduh! Ada yang salah:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </section>

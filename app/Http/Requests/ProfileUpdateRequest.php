@@ -26,6 +26,15 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+
+            // Tambahkan aturan untuk kolom-kolom tabel profiles di bawah ini
+            'nama_lengkap'       => ['nullable', 'string', 'max:255'],
+            'nim_nisn'           => ['nullable', 'string', 'max:50'],
+            'no_hp'              => ['nullable', 'string', 'max:20'],
+            'jenjang_pendidikan' => ['nullable', 'string', 'max:50'],
+            'sekolah_univ'       => ['nullable', 'string', 'max:255'],
+            'kota_asal'          => ['nullable', 'string', 'max:100'],
+            'jurusan'            => ['nullable', 'string', 'max:100'],
         ];
     }
 }
