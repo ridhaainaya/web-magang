@@ -26,21 +26,36 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-    // Update data di tabel users (email)
-    $request->user()->fill($request->validated());
+        // Coba ambil semua data tanpa validasi dulu untuk tes
+        $data = $request->all();
+        
+        // Debug: Apakah datanya benar-benar sampai ke sini?
+        // Jika diklik simpan muncul layar hitam berisi data kamu, berarti form sudah OK.
+        // dd($data); 
 
-    if ($request->user()->isDirty('email')) {
-        $request->user()->email_verified_at = null;
-    }
-    $request->user()->save();
+        try {
+            $user = $request->user();
+            
+            // Simpan ke tabel profiles
+            $profile = \App\Models\Profile::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'nama_lengkap'       => $request->nama_lengkap,
+                    'nim_nisn'           => $request->nim_nisn,
+                    'no_hp'              => $request->no_hp,
+                    'jenjang_pendidikan' => $request->jenjang_pendidikan,
+                    'sekolah_univ'       => $request->sekolah_univ,
+                    'kota_asal'          => $request->kota_asal,
+                    'jurusan'            => $request->jurusan,
+                ]
+            );
 
-    // Update atau Buat data di tabel profiles
-    $request->user()->profile()->updateOrCreate(
-        ['user_id' => $request->user()->id],
-        $request->only(['nama_lengkap', 'nim_nisn', 'no_hp', 'jenjang_pendidikan', 'sekolah_univ', 'kota_asal', 'jurusan'])
-    );
+            return Redirect::route('profile.edit')->with('status', 'profile-updated');
 
-    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        } catch (\Exception $e) {
+            // Jika ada error database, dia akan muncul di sini
+            dd($e->getMessage());
+        }
     }
 
     /**
