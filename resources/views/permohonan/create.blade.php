@@ -19,7 +19,7 @@
                         <p class="font-semibold text-gray-700">{{ $profile->nama_lengkap ?? $user->name }}</p>
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Asal Sekolah/Univ</label>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Asal Sekolah/Universitas</label>
                         <p class="font-semibold text-gray-700">{{ $profile->sekolah_univ ?? '-' }}</p>
                     </div>
                 </div>

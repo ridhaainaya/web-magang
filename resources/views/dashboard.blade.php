@@ -3,7 +3,7 @@
         <div class="relative z-10">
             <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Halo, {{ Auth::user()->name }}! 👋</h1>
             <p class="mt-3 opacity-90 text-sm md:text-lg font-medium max-w-2xl">
-                Selamat datang di <span class="underline decoration-2 underline-offset-4 decoration-white/30">Si APPEM</span>. Pantau status pendaftaran dan unduh dokumen magang Anda di sini.
+                Selamat datang di <span class="underline decoration-2 underline-offset-4 decoration-white/30">Si RAMA</span>. Pantau status pendaftaran dan unduh dokumen magang Anda di sini.
             </p>
         </div>
         <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
