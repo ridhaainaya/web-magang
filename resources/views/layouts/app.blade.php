@@ -21,6 +21,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-white h-full">
+    @php
+        // Ambil data untuk mengecek apakah form pendaftaran harus dikunci
+        $isLocked = \App\Models\Application::where('user_id', auth()->id())
+                    ->whereIn('status', ['diproses', 'diterima'])
+                    ->exists();
+    @endphp
+
     <div class="flex min-h-screen relative" x-data="{ open: window.innerWidth > 1024 }">
         
         <div x-show="open && window.innerWidth < 1024" 
@@ -53,9 +60,14 @@
                     <span x-show="open" class="ms-3 font-semibold text-sm">Dashboard</span>
                 </a>
 
-                <a href="{{ route('permohonan.create') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('permohonan.create') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
+                <a href="{{ $isLocked ? '#' : route('permohonan.create') }}" 
+                   class="flex items-center p-3 rounded-xl transition-all duration-200 
+                   {{ $isLocked ? 'opacity-50 cursor-not-allowed text-gray-300' : (request()->routeIs('permohonan.create') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600') }}">
                     <i class="fas fa-list-ul w-6 text-center shrink-0"></i>
                     <span x-show="open" class="ms-3 font-semibold text-sm text-nowrap">Permohonan Magang</span>
+                    @if($isLocked)
+                        <i x-show="open" class="fas fa-lock ms-auto text-[10px] opacity-40"></i>
+                    @endif
                 </a>
 
                 <a href="{{ route('permohonan.download') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('permohonan.download') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
@@ -129,5 +141,13 @@
             </main>
         </div>
     </div>
+
+    @if(session('error') || session('status'))
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" 
+             class="fixed bottom-5 right-5 z-[100] {{ session('error') ? 'bg-red-600' : 'bg-emerald-600' }} text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center animate-bounce-short">
+            <i class="fas {{ session('error') ? 'fa-exclamation-triangle' : 'fa-check-circle' }} mr-3"></i>
+            <span class="font-bold text-sm">{{ session('error') ?? session('status') }}</span>
+        </div>
+    @endif
 </body>
 </html>
