@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/permohonan', [PermohonanMagangController::class, 'create'])->name('permohonan.create');
     Route::post('/permohonan', [PermohonanMagangController::class, 'store'])->name('permohonan.store');
+    Route::get('/download-dokumen', [PermohonanMagangController::class, 'showDownload'])->name('permohonan.download');
 });
 
 require __DIR__.'/auth.php';
