@@ -13,14 +13,36 @@ class PermohonanMagangController extends Controller
     public function create()
     {
         $user = Auth::user();
-        // Load relasi profile
-        $profile = $user->profile;
 
+        // --- TAMBAHKAN PENGECEKAN DI SINI ---
+        // Cek apakah ada permohonan yang statusnya masih 'diproses' atau sudah 'diterima'
+        $hasActiveApplication = Application::where('user_id', $user->id)
+            ->whereIn('status', ['diproses', 'diterima'])
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Anda masih memiliki permohonan yang aktif atau sudah diterima.');
+        }
+        // ------------------------------------
+
+        $profile = $user->profile;
         return view('permohonan.create', compact('user', 'profile'));
     }
 
     public function store(Request $request)
     {
+        // --- TAMBAHKAN PENGECEKAN JUGA DI SINI (Keamanan Berlapis) ---
+        $hasActiveApplication = Application::where('user_id', Auth::id())
+            ->whereIn('status', ['diproses', 'diterima'])
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Gagal! Anda sudah memiliki permohonan yang sedang berjalan.');
+        }
+        //
+
         $request->validate([
             'no_surat' => 'required|string',
             'tgl_surat' => 'required|date',
@@ -29,6 +51,23 @@ class PermohonanMagangController extends Controller
             'tgl_awal' => 'required|date|after_or_equal:today',
             'tgl_akhir' => 'required|date|after:tgl_awal',
             'file_surat_pengantar' => 'required|mimes:pdf|max:2048',
+        ], [
+            // Pesan kustom untuk masing-masing aturan
+            'required' => ':attribute wajib diisi.',
+            'date' => 'Format :attribute tidak valid.',
+            'mimes' => ':attribute harus berupa file PDF.',
+            'max' => 'Ukuran :attribute maksimal adalah 2MB.',
+            'after_or_equal' => ':attribute tidak boleh tanggal yang sudah lewat.',
+            'after' => ':attribute harus setelah tanggal mulai.',
+        ], [
+            // Mengganti nama field asli menjadi nama yang lebih "manusiawi"
+            'no_surat' => 'Nomor Surat',
+            'tgl_surat' => 'Tanggal Surat',
+            'perihal' => 'Perihal',
+            'jabatan_penandatangan' => 'Jabatan Penandatangan',
+            'tgl_awal' => 'Tanggal Mulai Magang',
+            'tgl_akhir' => 'Tanggal Selesai Magang',
+            'file_surat_pengantar' => 'File Surat Pengantar',
         ]);
 
         // Mengambil user id dengan cara yang lebih disukai IDE
