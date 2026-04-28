@@ -6,7 +6,7 @@
                 <p class="text-slate-500 text-sm">Selamat datang kembali! Berikut adalah ringkasan sistem magang hari ini.</p>
             </div>
             <div class="hidden md:block">
-                <span class="text-xs font-medium text-slate-400">Terakhir diperbarui: {{ now()->translatedFormat('d F Y, H:i') }}</span>
+                <span class="text-xs font-medium text-slate-400">Terakhir diperbarui: {{ now()->timezone('Asia/Jakarta')->translatedFormat('d F Y, H:i') }} WIB</span>
             </div>
         </div>
 
