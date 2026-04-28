@@ -41,7 +41,7 @@
 
                     {{-- Slot Surat Keterangan --}}
                     <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
-                        <label class="block text-sm font-black text-slate-700 uppercase tracking-wider mb-3">1. Surat Keterangan (PDF)</label>
+                        <label class="block text-sm font-black text-slate-700 uppercase tracking-wider mb-3">2. Surat Keterangan (PDF)</label>
                         <input type="file" name="file_keterangan" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-black file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor:pointer">
                         @if($application->file_keterangan)
                             <div class="mt-3 flex items-center gap-2 text-xs font-bold text-emerald-600 bg-emerald-50 p-2 rounded-lg">

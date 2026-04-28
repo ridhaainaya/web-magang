@@ -93,6 +93,7 @@ class AdminController extends Controller
 
         $request->validate([
             'file_jawaban' => 'nullable|mimes:pdf|max:2048',
+            'file_keterangan' => 'nullable|mimes:pdf|max:2048',
             'file_sertifikat' => 'nullable|mimes:pdf|max:2048',
         ]);
 
