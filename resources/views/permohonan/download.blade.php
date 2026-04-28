@@ -140,6 +140,28 @@
                         </tr>
 
                         @if($application->status == 'diterima')
+
+                        <tr class="hover:bg-indigo-50/30 transition">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg {{ $application->file_keterangan ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-50 text-gray-300' }} flex items-center justify-center mr-3">
+                                        <i class="fas fa-award text-xs"></i>
+                                    </div>
+                                    <span class="text-sm font-bold {{ $application->file_keterangan ? 'text-indigo-700' : 'text-gray-400' }}">Surat Keterangan</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-gray-500">Kepala BAPPERIDA</td>
+                            <td class="px-6 py-4 text-right">
+                                @if($application->file_keterangan)
+                                    <a href="{{ asset('storage/' . $application->file_keterangan) }}" target="_blank" class="inline-flex items-center bg-indigo-600 text-white px-4 py-2 rounded-xl text-[10px] font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition">
+                                        <i class="fas fa-file-download mr-2"></i> Download
+                                    </a>
+                                @else
+                                    <span class="text-gray-300 text-[10px] font-medium italic">TERBIT SETELAH MAGANG</span>
+                                @endif
+                            </td>
+                        </tr>
+
                         <tr class="hover:bg-indigo-50/30 transition">
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
