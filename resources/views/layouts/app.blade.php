@@ -55,53 +55,77 @@
             </div>
 
             <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
-                <a href="{{ route('dashboard') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
-                    <i class="fas fa-th-large w-6 text-center shrink-0"></i>
-                    <span x-show="open" class="ms-3 font-semibold text-sm">Dashboard</span>
-                </a>
+                @if(Auth::user()->role === 'admin')
+                    <div class="pb-2">
+                        <p x-show="open" class="px-4 text-[10px] font-bold text-purple-400 uppercase tracking-widest">Administrator</p>
+                    </div>
 
-                <a href="{{ $isLocked ? '#' : route('permohonan.create') }}" 
-                   class="flex items-center p-3 rounded-xl transition-all duration-200 
-                   {{ $isLocked ? 'opacity-50 cursor-not-allowed text-gray-300' : (request()->routeIs('permohonan.create') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600') }}">
-                    <i class="fas fa-list-ul w-6 text-center shrink-0"></i>
-                    <span x-show="open" class="ms-3 font-semibold text-sm text-nowrap">Permohonan Magang</span>
-                    @if($isLocked)
-                        <i x-show="open" class="fas fa-lock ms-auto text-[10px] opacity-40"></i>
-                    @endif
-                </a>
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-600' : 'text-gray-400 hover:bg-purple-50 hover:text-purple-600' }} transition-all duration-200">
+                        <i class="fas fa-chart-line w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Statistik Admin</span>
+                    </a>
 
-                <a href="{{ route('permohonan.download') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('permohonan.download') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
-                    <i class="fas fa-cloud-download-alt w-6 text-center shrink-0"></i>
-                    <span x-show="open" class="ms-3 font-semibold text-sm text-nowrap">Download Dokumen</span>
-                </a>
+                    <a href="{{ route('admin.permohonan.index') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('admin.permohonan.*') ? 'bg-purple-50 text-purple-600' : 'text-gray-400 hover:bg-purple-50 hover:text-purple-600' }} transition-all duration-200">
+                        <i class="fas fa-users-cog w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Kelola Mahasiswa</span>
+                    </a>
 
-                <div class="pt-4 pb-2">
-                    <p x-show="open" class="px-4 text-[10px] font-bold text-gray-300 uppercase tracking-widest transition-all">Account</p>
-                    <hr x-show="!open" class="border-gray-50 mx-2">
+                    <a href="{{ route('admin.permohonan.list-dokumen') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('admin.permohonan.list-dokumen') ? 'bg-purple-50 text-purple-600' : 'text-gray-400 hover:bg-purple-50 hover:text-purple-600' }} transition-all duration-200">
+                        <i class="fas fa-file-export w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Upload Balasan</span>
+                    </a>
+
+                @else
+                    <div class="pb-2">
+                        <p x-show="open" class="px-4 text-[10px] font-bold text-blue-400 uppercase tracking-widest">Menu Mahasiswa</p>
+                    </div>
+
+                    <a href="{{ route('dashboard') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
+                        <i class="fas fa-th-large w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Dashboard Saya</span>
+                    </a>
+
+                    <a href="{{ $isLocked ? '#' : route('permohonan.create') }}" 
+                    class="flex items-center p-3 rounded-xl transition-all duration-200 
+                    {{ $isLocked ? 'opacity-50 cursor-not-allowed text-gray-300' : (request()->routeIs('permohonan.create') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600') }}">
+                        <i class="fas fa-file-alt w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Daftar Magang</span>
+                    </a>
+
+                    <a href="{{ route('permohonan.download') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('permohonan.download') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
+                        <i class="fas fa-download w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Cetak Berkas</span>
+                    </a>
+
+                    <a href="{{ route('profile.edit') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('profile.edit') ? 'bg-gray-100 text-gray-800' : 'text-gray-400 hover:bg-gray-50' }} transition-all duration-200">
+                        <i class="fas fa-cog w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Pengaturan Akun</span>
+                    </a>
+                @endif
+
+                <div class="pt-6 pb-2">
+                    <hr class="border-gray-50 mx-2 mb-4">
                 </div>
-
-                <a href="{{ route('profile.edit') }}" class="flex items-center p-3 rounded-xl {{ request()->routeIs('profile.edit') ? 'bg-blue-50 text-blue-600' : 'text-gray-400 hover:bg-gray-50 hover:text-blue-600' }} transition-all duration-200">
-                    <i class="fas fa-user-edit w-6 text-center shrink-0"></i>
-                    <span x-show="open" class="ms-3 font-semibold text-sm">Edit Profile</span>
-                </a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="w-full flex items-center p-3 rounded-xl text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all duration-200">
-                        <i class="fas fa-sign-out-alt w-6 text-center shrink-0"></i>
-                        <span x-show="open" class="ms-3 font-semibold text-sm">Keluar</span>
+                        <i class="fas fa-power-off w-6 text-center shrink-0"></i>
+                        <span x-show="open" class="ms-3 font-semibold text-sm">Log Out</span>
                     </button>
                 </form>
             </nav>
 
             <div class="p-4 border-t border-gray-50 bg-gray-50/50">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm shrink-0">
-                        <i class="fas fa-user"></i>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-sm shrink-0">
+                        {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
                     <div x-show="open" class="ms-3 overflow-hidden">
                         <p class="text-xs font-bold text-gray-700 truncate">{{ Auth::user()->name }}</p>
-                        <p class="text-[10px] text-gray-400">Mahasiswa Magang</p>
+                        <p class="text-[10px] text-gray-400 truncate">
+                            {{ Auth::user()->role === 'admin' ? 'Administrator' : (Auth::user()->profile->sekolah_univ ?? 'Mahasiswa Magang') }}
+                        </p>
                     </div>
                 </div>
             </div>
