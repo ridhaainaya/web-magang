@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Si TAMA - Sistem Pendaftaran Magang</title>
+    <title>Si RAMA - Sistem Pendaftaran Magang</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -114,7 +114,7 @@
                         Si 
                         <span class="relative inline-block">
                             <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-                                TAMA
+                                RAMA
                             </span>
                             <!-- Glow effect -->
                             <span class="absolute inset-0 blur-xl opacity-30 bg-gradient-to-r from-blue-600 to-purple-600 -z-10"></span>
@@ -250,7 +250,7 @@
                         </div>
                     </div>
                     <p class="text-slate-500 text-sm leading-relaxed">
-                        Portal resmi pendaftaran magang untuk mahasiswa dan siswa di lingkungan Badan Perencanaan, Riset, dan Inovasi Daerah Kabupaten Karanganyar.
+                        Portal resmi pendaftaran magang untuk mahasiswa dan siswa di lingkungan Badan Perencanaan Pembangunan, Riset dan Inovasi Daerah Kabupaten Karanganyar.
                     </p>
                     <div class="flex items-center space-x-4 text-slate-400">
                         <a href="https://www.instagram.com/bapperida_karanganyar/" class="hover:text-pink-600 transition-colors text-lg"><i class="fab fa-instagram"></i></a>
@@ -310,7 +310,7 @@
 
             <div class="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <p class="text-slate-400 text-xs font-medium">
-                    © 2026 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 font-bold">Si TAMA</span> Karanganyar.
+                    © 2026 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 font-bold">BAPPERIDA</span> Kabupaten Karanganyar.
                 </p>
                 <div class="flex space-x-8">
                     <a href="#" class="text-slate-400 hover:text-slate-800 text-xs font-semibold transition-colors">Kebijakan Privasi</a>
