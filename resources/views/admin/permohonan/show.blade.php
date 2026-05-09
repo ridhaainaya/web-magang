@@ -1,11 +1,11 @@
 <x-app-layout>
     <div class="min-h-screen bg-slate-50/50 pb-12">
-        <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-br from-blue-600 to-indigo-700 -z-10 shadow-lg">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+        <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-br from-blue-700 via-indigo-700 to-indigo-800 -z-10 shadow-lg border-b border-indigo-900/50">
+            <div class="absolute inset-0 bg-black/5"></div>
         </div>
 
         <div class="p-6 max-w-5xl mx-auto pt-10">
-            <a href="{{ route('admin.permohonan.index') }}" class="inline-flex items-center text-sm text-white/80 hover:text-white mb-8 group transition-all">
+            <a href="{{ route('admin.permohonan.index') }}" class="inline-flex items-center text-sm text-white hover:text-white mb-8 group transition-all">
                 <div class="p-2 rounded-full bg-white/10 group-hover:bg-white/20 mr-3 transition-all">
                     <i class="fas fa-arrow-left"></i>
                 </div>

@@ -4,88 +4,111 @@
         $application = \App\Models\Application::where('user_id', auth()->id())->latest()->first();
     @endphp
 
-    <div class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 md:p-10 text-white shadow-xl shadow-blue-200/50 mb-10">
-        <div class="relative z-10">
-            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Halo, {{ Auth::user()->name }}! 👋</h1>
-            <p class="mt-3 opacity-90 text-sm md:text-lg font-medium max-w-2xl">
-                Selamat datang di <span class="underline decoration-2 underline-offset-4 decoration-white/30">Si TAMA</span>. Pantau status pendaftaran dan unduh dokumen magang Anda di sini.
-            </p>
-        </div>
-        <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Background: Bukan putih polos, tapi off-white dengan tint lembut -->
+    <div class="min-h-screen bg-[#F4F7FA] p-6 md:p-10 font-sans text-[#333]">
         
-        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between mb-6">
-                @if(!$application)
-                    <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 text-xl border border-gray-100">
-                        <i class="fas fa-file-signature"></i>
+        <!-- Bagian Banner Utama (Revisi: Tanpa View Calendar & Bahasa Indonesia) -->
+        <div class="relative overflow-hidden bg-[#EEF5F1] rounded-[2.5rem] p-10 md:p-14 mb-10 border border-[#E2EBE5]">
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-center">
+                <div class="max-w-2xl text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-[#2D3F33] leading-tight">
+                        Pantau terus progres dan kegiatan magangmu di sini
+                    </h1>
+                    <p class="mt-4 text-[#6A7C70] text-base md:text-lg font-medium leading-relaxed">
+                        Halo, <span class="text-[#4CAF50] font-bold">{{ Auth::user()->name }}!</span> 👋 Selamat datang di <span class="font-bold">Si TAMA</span>. Jangan lupa cek status pendaftaranmu secara berkala ya.
+                    </p>
+                </div>
+                
+                <!-- Ikon Dekoratif yang simpel -->
+                <div class="hidden md:block">
+                     <div class="w-40 h-40 bg-white/60 rounded-[2rem] flex items-center justify-center shadow-sm border border-white/80 rotate-3">
+                        <i class="fas fa-paper-plane text-5xl text-[#4CAF50] opacity-70"></i>
+                     </div>
+                </div>
+            </div>
+            <!-- Elemen pemanis latar belakang -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#4CAF50]/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- Dashboard Cards (Logic & Tata Letak tetap sesuai kode awal) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Kartu 1: Status (Kuning Pastel) -->
+            <div class="bg-white p-8 rounded-[2.5rem] border border-[#F0F0F0] shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-[#FFF9E6] rounded-2xl flex items-center justify-center text-[#F4B400] text-xl shadow-sm">
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <span class="px-3 py-1 bg-gray-50 text-gray-400 text-[10px] font-bold uppercase rounded-full border border-gray-100">Kosong</span>
-                @elseif($application->status == 'diproses')
-                    <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-xl border border-amber-100">
-                        <i class="fas fa-spinner fa-spin"></i>
+                    <div>
+                        <h3 class="text-[#A0A0A0] text-[10px] font-black uppercase tracking-[0.15em]">Status</h3>
+                        <p class="text-lg font-bold text-[#2D3F33]">Permohonan</p>
                     </div>
-                    <span class="px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-bold uppercase rounded-full border border-amber-100">Proses</span>
-                @elseif($application->status == 'diterima')
-                    <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-xl border border-emerald-100">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase rounded-full border border-emerald-100">Diterima</span>
+                </div>
+
+                <div class="p-5 bg-[#FFFCF2] rounded-2xl border border-[#FFF4D1] mb-6">
+                    <p class="text-sm font-bold text-[#856404]">
+                         @if(!$application) Belum Mengajukan @elseif($application->status == 'diproses') Sedang Direview @elseif($application->status == 'diterima') Diterima @else Pendaftaran Ditolak @endif
+                    </p>
+                </div>
+                
+                @if(!$application || $application->status == 'ditolak')
+                    <a href="{{ route('permohonan.create') }}" class="inline-flex items-center gap-2 text-xs font-bold text-[#4CAF50] hover:bg-[#4CAF50]/5 px-4 py-2 rounded-lg transition-colors">
+                        Buat Pendaftaran <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
                 @else
-                    <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 text-xl border border-red-100">
-                        <i class="fas fa-times-circle"></i>
+                    <p class="text-[11px] text-[#BBB] font-medium italic px-2">Terakhir diupdate: {{ $application->updated_at->format('d M Y') }}</p>
+                @endif
+            </div>
+
+            <!-- Kartu 2: Unduhan (Ungu Pastel) -->
+            <div class="bg-white p-8 rounded-[2.5rem] border border-[#F0F0F0] shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-[#F5F2FF] rounded-2xl flex items-center justify-center text-[#7C4DFF] text-xl shadow-sm">
+                        <i class="fas fa-envelope-open-text"></i>
                     </div>
-                    <span class="px-3 py-1 bg-red-50 text-red-600 text-[10px] font-bold uppercase rounded-full border border-red-100">Ditolak</span>
+                    <div>
+                        <h3 class="text-[#A0A0A0] text-[10px] font-black uppercase tracking-[0.15em]">Unduhan</h3>
+                        <p class="text-lg font-bold text-[#2D3F33]">Berkas Balasan</p>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-[#F9F8FF] rounded-2xl border border-[#EBE7FF] mb-6">
+                    <p class="text-sm font-bold text-[#5E35B1]">
+                        {{ $application && $application->status == 'diterima' ? 'Dokumen sudah siap' : 'Belum tersedia' }}
+                    </p>
+                </div>
+
+                @if($application && $application->status == 'diterima')
+                    <a href="{{ route('permohonan.download') }}" class="inline-flex items-center gap-2 text-xs font-bold text-[#7C4DFF] hover:bg-[#7C4DFF]/5 px-4 py-2 rounded-lg transition-colors">
+                        Download Berkas <i class="fas fa-download text-[10px]"></i>
+                    </a>
+                @else
+                    <p class="text-[11px] text-[#BBB] font-medium italic px-2">Cek kembali nanti ya</p>
                 @endif
             </div>
 
-            <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Status Permohonan</h3>
-            
-            <p class="text-xl font-extrabold text-gray-800">
-                @if(!$application) Belum Mengajukan @elseif($application->status == 'diproses') Menunggu Review @elseif($application->status == 'diterima') Disetujui @else Pendaftaran Ditolak @endif
-            </p>
-            
-            @if(!$application || $application->status == 'ditolak')
-                <a href="{{ route('permohonan.create') }}" class="inline-block text-xs text-blue-600 mt-2 font-bold hover:underline">
-                    Daftar Sekarang &rarr;
+            <!-- Kartu 3: Profil (Hijau Pastel) -->
+            <div class="bg-white p-8 rounded-[2.5rem] border border-[#F0F0F0] shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-[#EBF7EE] rounded-2xl flex items-center justify-center text-[#4CAF50] text-xl shadow-sm">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-[#A0A0A0] text-[10px] font-black uppercase tracking-[0.15em]">Profil</h3>
+                        <p class="text-lg font-bold text-[#2D3F33]">Data Diri</p>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-[#F4FAF5] rounded-2xl border border-[#DFF0E3] mb-6">
+                    <p class="text-sm font-bold text-[#2E7D32]">
+                        {{ auth()->user()->profile ? 'Profil sudah lengkap' : 'Lengkapi profil kamu' }}
+                    </p>
+                </div>
+
+                <a href="{{ route('profile.edit') }}" class="inline-flex items-center gap-2 text-xs font-bold text-[#4CAF50] hover:bg-[#4CAF50]/5 px-4 py-2 rounded-lg transition-colors">
+                    Edit Profil Saya <i class="fas fa-user-edit text-[10px]"></i>
                 </a>
-            @else
-                <p class="text-xs text-gray-400 mt-2 italic">*Data terkunci selama proses</p>
-            @endif
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-14 h-14 {{ $application && $application->status == 'diterima' ? 'bg-purple-50 text-purple-600 border-purple-100' : 'bg-gray-50 text-gray-300 border-gray-100' }} rounded-2xl flex items-center justify-center text-xl border">
-                    <i class="fas fa-file-download"></i>
-                </div>
             </div>
-            <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Unduhan Tersedia</h3>
-            <p class="text-xl font-extrabold text-gray-800">Dokumen Balasan</p>
-            
-            @if($application && $application->status == 'diterima')
-                <a href="{{ route('permohonan.download') }}" class="text-xs text-purple-600 mt-2 font-bold hover:underline block">Lihat Daftar Dokumen &rarr;</a>
-            @else
-                <p class="text-xs text-gray-400 mt-2 italic">Belum tersedia</p>
-            @endif
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-xl border border-emerald-100">
-                    <i class="fas fa-id-card"></i>
-                </div>
-                @if(auth()->user()->profile)
-                    <i class="fas fa-check-circle text-emerald-500"></i>
-                @endif
-            </div>
-            <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Biodata Mahasiswa</h3>
-            <p class="text-xl font-extrabold text-gray-800">{{ auth()->user()->profile ? 'Data Lengkap' : 'Lengkapi Profil' }}</p>
-            <a href="{{ route('profile.edit') }}" class="text-xs text-emerald-600 mt-2 font-bold hover:underline block">
-                {{ auth()->user()->profile ? 'Update Profil' : 'Lengkapi Sekarang' }} &rarr;
-            </a>
         </div>
     </div>
 </x-app-layout>

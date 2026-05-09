@@ -53,7 +53,7 @@
                         <i class="fas fa-users text-xl"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">User Mahasiswa</p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">User </p>
                         <p class="text-2xl font-bold text-slate-800">{{ $stats['users'] }}</p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <h3 class="font-bold text-slate-800 flex items-center text-sm">
                     <i class="fas fa-history mr-3 text-blue-500"></i> Permohonan Terbaru
                 </h3>
-                <a href="#" class="text-[10px] font-bold text-blue-600 hover:text-blue-800 transition uppercase tracking-tighter">
+                <a href="{{ route('admin.permohonan.index') }}" class="text-[10px] font-bold text-blue-600 hover:text-blue-800 transition uppercase tracking-tighter">
                     Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>
@@ -74,7 +74,7 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-slate-50/50 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                            <th class="px-6 py-4">Nama Mahasiswa</th>
+                            <th class="px-6 py-4">Nama Pemohon</th>
                             <th class="px-6 py-4">Nomor Surat</th>
                             <th class="px-6 py-4 text-center">Status</th>
                             <th class="px-6 py-4 text-right">Aksi</th>

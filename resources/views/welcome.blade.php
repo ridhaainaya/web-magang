@@ -85,7 +85,7 @@
                 
                 <div class="w-full md:w-[50%] relative group"> <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
                     
-                    <img src="{{ asset('images/ilustrasi-welcome.png') }}" 
+                    <img src="{{ asset('images/recruitment_process.png') }}" 
                         alt="Illustration" 
                         class="relative w-full h-auto drop-shadow-2xl transform transition-all duration-700 hover:scale-105 animate-float">
                     
@@ -255,6 +255,27 @@
                     <div class="flex items-center space-x-4 text-slate-400">
                         <a href="https://www.instagram.com/bapperida_karanganyar/" class="hover:text-pink-600 transition-colors text-lg"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@bapperida.karanganyar" class="hover:text-red-600 transition-colors text-lg"><i class="fab fa-youtube"></i></a>
+                        <a href="https://bapperida.karanganyarkab.go.id/" class="hover:text-red-600 transition-colors text-lg"><i class="fab fa-link"></i></a>
+                    </div>
+                    <div class="pt-2 space-y-1">
+                        <h4 class="text-slate-800 font-bold text-sm uppercase tracking-[0.2em] flex items-center">
+                            <span class="w-8 h-[2px] bg-purple-600 mr-3"></span>Jam Operasional
+                        </h4>
+
+                        <ul class="space-y-1 text-sm text-slate-500">
+                            <li class="flex justify-between">
+                                <span>Senin - Kamis</span>
+                                <span>07:30 – 16:00 WIB</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>Jumat</span>
+                                <span>07:30 – 11:30 WIB</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>Sabtu - Minggu</span>
+                                <span class="text-red-500 font-medium">Libur</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -305,7 +326,7 @@
                             <i class="fas fa-external-link-alt text-sm"></i>
                         </a>
                     </div>
-                </div>
+                </div> 
             </div>
 
             <div class="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
