@@ -90,6 +90,13 @@
                         <span x-show="open" class="ms-3 font-bold text-sm">Upload Balasan</span>
                     </a>
 
+                    <a href="{{ route('admin.settings.manual') }}" class="flex items-center p-3 rounded-xl transition-all {{ request()->routeIs('admin.settings.manual') ? 'bg-indigo-50 text-indigo-600 shadow-sm' : 'text-[#64748B] hover:bg-indigo-50/50 hover:text-indigo-600' }}">
+                        <div class="w-8 h-8 rounded-lg {{ request()->routeIs('admin.settings.manual') ? 'bg-indigo-600 text-white' : 'bg-indigo-50 text-indigo-500' }} flex items-center justify-center text-xs shrink-0 transition-colors">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <span x-show="open" class="ms-3 font-bold text-sm">User Manual</span>
+                    </a>
+
                 @else
                     <div class="pb-2">
                         <p x-show="open" class="px-4 text-[10px] font-black text-[#94A3B8] uppercase tracking-[0.2em]">Menu Utama</p>

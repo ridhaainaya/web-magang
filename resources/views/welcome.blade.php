@@ -28,7 +28,17 @@
 
                 <div class="hidden md:flex space-x-10 items-center text-xs font-bold tracking-widest uppercase">
                     <a href="#" class="text-blue-600 border-b-2 border-blue-600 pb-1">Home</a>
-                    <a href="#" class="text-gray-500 hover:text-blue-600 transition">User Manual</a>
+                    
+                    @if(isset($manualPath) && $manualPath)
+                        <a href="{{ asset('storage/' . $manualPath) }}" target="_blank" class="text-gray-500 hover:text-blue-600 transition">
+                            User Manual
+                        </a>
+                    @else
+                        <a href="#" onclick="alert('User manual sedang dipersiapkan oleh pihak admin.')" class="text-gray-400 hover:text-blue-600 transition opacity-70">
+                            User Manual
+                        </a>
+                    @endif
+                    
                     <a href="{{ route('login') }}" class="text-gray-500 hover:text-blue-600 transition">Login</a>
                     <button class="text-gray-400 hover:text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -233,6 +243,49 @@
                 </div>
             </div>
         </section>
+
+        <div class="bg-slate-50 py-20 border-t border-slate-100">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight mb-2">Pertanyaan Populer (FAQ)</h2>
+                    <p class="text-sm text-slate-500 font-medium">Punya pertanyaan seputar pengajuan magang? Temukan jawabannya di bawah ini.</p>
+                </div>
+
+                <div x-data="{ active: null }" class="space-y-4">
+                    
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all">
+                        <button @click="active = (active === 1 ? null : 1)" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 group">
+                            <span class="font-bold text-sm text-slate-700 group-hover:text-blue-600 transition-colors">Bagaimana alur pendaftaran magang di sini?</span>
+                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-300" :class="{ 'rotate-180 text-blue-600': active === 1 }"></i>
+                        </button>
+                        <div x-show="active === 1" x-collapse x-cloak class="px-6 pb-5 text-xs text-slate-500 leading-relaxed bg-slate-50/50 border-t border-slate-50 pt-3">
+                            Mahasiswa cukup membuat akun terlebih dahulu, mengisi data akademik pada formulir permohonan, dan mengunggah berkas Surat Pengantar resmi dari instansi pendidikan asal.
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all">
+                        <button @click="active = (active === 2 ? null : 2)" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 group">
+                            <span class="font-bold text-sm text-slate-700 group-hover:text-blue-600 transition-colors">Berapa lama proses verifikasi berkas oleh admin?</span>
+                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-300" :class="{ 'rotate-180 text-blue-600': active === 2 }"></i>
+                        </button>
+                        <div x-show="active === 2" x-collapse x-cloak class="px-6 pb-5 text-xs text-slate-500 leading-relaxed bg-slate-50/50 border-t border-slate-50 pt-3">
+                            Proses verifikasi berkas akademik dan penyesuaian kapasitas kuota di departemen terkait umumnya memakan waktu 3 hingga 7 hari kerja.
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all">
+                        <button @click="active = (active === 3 ? null : 3)" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 group">
+                            <span class="font-bold text-sm text-slate-700 group-hover:text-blue-600 transition-colors">Bagaimana saya mengetahui status permohonan saya?</span>
+                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-300" :class="{ 'rotate-180 text-blue-600': active === 3 }"></i>
+                        </button>
+                        <div x-show="active === 3" x-collapse x-cloak class="px-6 pb-5 text-xs text-slate-500 leading-relaxed bg-slate-50/50 border-t border-slate-50 pt-3">
+                            Anda dapat memantau status pengajuan secara real-time (Diproses, Diterima, atau Ditolak) melalui dashboard akun setelah Anda berhasil login ke dalam sistem.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>           
     </main>
 
     <footer class="relative bg-slate-50 border-t border-slate-200/60 pt-16 pb-8 overflow-hidden">

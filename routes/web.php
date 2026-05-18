@@ -40,6 +40,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     
     Route::patch('/application/{id}/status', [AdminController::class, 'updateStatus'])->name('admin.update-status');
     Route::patch('/permohonan/{id}/upload-dokumen', [AdminController::class, 'uploadDokumenHasil'])->name('admin.upload-dokumen-hasil');
+
+    Route::get('/settings/user-manual', [AdminController::class, 'manageUserManual'])->name('admin.settings.manual');
+    Route::post('/settings/user-manual', [AdminController::class, 'uploadUserManual'])->name('admin.settings.manual.update');
 });
 
 require __DIR__.'/auth.php';
